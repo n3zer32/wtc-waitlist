@@ -127,17 +127,6 @@ export default function Home() {
                             <BigLogo />
                         </div>
 
-                        {/* Thumbnail Preview */}
-                        {thumbnailPreview && (
-                            <div className="mx-auto max-w-sm overflow-hidden rounded-xl border border-slate-200 shadow-lg">
-                                <img
-                                    src={thumbnailPreview}
-                                    alt="Your thumbnail"
-                                    className="w-full aspect-video object-cover"
-                                />
-                            </div>
-                        )}
-
                         {/* Message */}
                         <div className="space-y-3">
                             <div className="inline-flex items-center gap-2 bg-amber-50 text-amber-700 px-4 py-2 rounded-full text-sm font-medium">
@@ -211,6 +200,11 @@ export default function Home() {
                     className="min-h-screen flex flex-col items-center justify-center px-4"
                 >
                     <div className="w-full max-w-2xl space-y-8 text-center">
+                        {/* Logo */}
+                        <div className="flex justify-center">
+                            <BigLogo />
+                        </div>
+
                         {/* Title */}
                         <div className="space-y-3">
                             <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
