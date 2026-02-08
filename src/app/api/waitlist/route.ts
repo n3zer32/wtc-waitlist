@@ -1,24 +1,7 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { kv } from '@vercel/kv';
 
-const EMAILS_FILE = path.join(process.cwd(), 'emails.json');
-
-function getEmails(): string[] {
-    try {
-        if (fs.existsSync(EMAILS_FILE)) {
-            const data = fs.readFileSync(EMAILS_FILE, 'utf-8');
-            return JSON.parse(data);
-        }
-    } catch {
-        // File doesn't exist or is invalid
-    }
-    return [];
-}
-
-function saveEmails(emails: string[]) {
-    fs.writeFileSync(EMAILS_FILE, JSON.stringify(emails, null, 2));
-}
+const EMAILS_KEY = 'waitlist_emails';
 
 export async function POST(request: Request) {
     try {
@@ -31,10 +14,13 @@ export async function POST(request: Request) {
             );
         }
 
-        const emails = getEmails();
+        const normalizedEmail = email.toLowerCase().trim();
+
+        // Get existing emails
+        const emails: string[] = await kv.get(EMAILS_KEY) || [];
 
         // Check for duplicates
-        if (emails.includes(email.toLowerCase())) {
+        if (emails.includes(normalizedEmail)) {
             return NextResponse.json(
                 { error: 'Email already registered' },
                 { status: 400 }
@@ -42,10 +28,10 @@ export async function POST(request: Request) {
         }
 
         // Add new email
-        emails.push(email.toLowerCase());
-        saveEmails(emails);
+        emails.push(normalizedEmail);
+        await kv.set(EMAILS_KEY, emails);
 
-        console.log(`✅ New waitlist signup: ${email}`);
+        console.log(`✅ New waitlist signup: ${normalizedEmail}`);
         console.log(`📊 Total signups: ${emails.length}`);
 
         return NextResponse.json({
@@ -62,9 +48,17 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
-    const emails = getEmails();
-    return NextResponse.json({
-        count: emails.length,
-        emails: emails
-    });
+    try {
+        const emails: string[] = await kv.get(EMAILS_KEY) || [];
+        return NextResponse.json({
+            count: emails.length,
+            emails: emails
+        });
+    } catch (error) {
+        return NextResponse.json({
+            count: 0,
+            emails: [],
+            error: 'KV not configured'
+        });
+    }
 }
