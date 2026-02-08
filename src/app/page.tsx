@@ -119,14 +119,13 @@ export default function Home() {
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -50 }}
-                    className="min-h-screen flex flex-col items-center px-4 pt-12 pb-8"
+                    className="min-h-screen flex flex-col items-center justify-center px-4"
                 >
-                    {/* Logo at top */}
-                    <div className="flex justify-center mb-12">
-                        <BigLogo />
-                    </div>
-
-                    <div className="w-full max-w-xl space-y-8 text-center flex-1 flex flex-col justify-center">
+                    <div className="w-full max-w-xl space-y-8 text-center">
+                        {/* Logo */}
+                        <div className="flex justify-center">
+                            <BigLogo />
+                        </div>
 
                         {/* Message */}
                         <div className="space-y-3">
@@ -198,14 +197,13 @@ export default function Home() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0, x: -50 }}
-                    className="min-h-screen flex flex-col items-center px-4 pt-12 pb-8"
+                    className="min-h-screen flex flex-col items-center justify-center px-4"
                 >
-                    {/* Logo at top */}
-                    <div className="flex justify-center mb-12">
-                        <BigLogo />
-                    </div>
-
-                    <div className="w-full max-w-2xl space-y-8 text-center flex-1 flex flex-col justify-center">
+                    <div className="w-full max-w-2xl space-y-8 text-center">
+                        {/* Logo */}
+                        <div className="flex justify-center">
+                            <BigLogo />
+                        </div>
 
                         {/* Title */}
                         <div className="space-y-3">
