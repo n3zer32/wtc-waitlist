@@ -10,7 +10,7 @@ export const BigLogo = () => {
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
             className="flex items-center gap-3 cursor-pointer select-none group"
         >
-            <span className="text-5xl font-semibold tracking-tight text-slate-900">
+            <span className="text-5xl font-semibold tracking-tight text-slate-900 leading-none">
                 willthey
             </span>
 
@@ -30,7 +30,7 @@ export const BigLogo = () => {
           transition-all duration-150
         "
             >
-                <span className="text-5xl font-semibold text-slate-900">
+                <span className="text-5xl font-semibold text-slate-900 leading-none -mt-0.5">
                     .click
                 </span>
             </motion.div>
