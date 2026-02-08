@@ -3,6 +3,7 @@
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BigLogo } from '@/components/BigLogo';
+import { Header } from '@/components/Header';
 
 type View = 'upload' | 'waitlist' | 'success';
 
@@ -197,14 +198,11 @@ export default function Home() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0, x: -50 }}
-                    className="min-h-screen flex flex-col items-center justify-center px-4"
+                    className="min-h-screen flex flex-col items-center justify-center px-4 pt-16"
                 >
-                    <div className="w-full max-w-2xl space-y-8 text-center">
-                        {/* Logo */}
-                        <div className="flex justify-center">
-                            <BigLogo />
-                        </div>
+                    <Header />
 
+                    <div className="w-full max-w-2xl space-y-8 text-center">
                         {/* Title */}
                         <div className="space-y-3">
                             <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
